@@ -15,6 +15,6 @@ pip install -r requirements.txt
 ```
 2) Скомпилировать приложение с помощью `nuitka`
 ```
-nuitka --standalone --plugin-enable=pyside6 src/main.py
+nuitka --standalone --windows-console-mode=disable --plugin-enable=pyside6 src/main.py
 ```
 3) Запустить `main.exe` из `main.dust`
