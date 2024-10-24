@@ -96,7 +96,6 @@ class DatabaseViewer(QMainWindow):
         except psycopg.OperationalError as e:
             self.ui_error.textBrowser.setText(e.__repr__())
             self.error_window.show()
-            print(e)
 
     def update_list_of_tables(self) -> None:
         self.ui_main.tablesList.clear()
@@ -219,7 +218,6 @@ class DatabaseViewer(QMainWindow):
             except ValueError as e:
                 self.ui_error.textBrowser.setText(e.__repr__())
                 self.error_window.show()
-                print(e)
 
     def save_button_clicked(self, action: str) -> Callable:
         def wrapper() -> None:
