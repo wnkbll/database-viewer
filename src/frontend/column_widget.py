@@ -18,27 +18,27 @@ class ColumnWidget(Widget):
 
     @property
     def name(self) -> str:
-        return self.ui.fieldNameEdit.text().strip()
+        return self.ui.name_edit.text().strip()
 
     @name.setter
     def name(self, value: str) -> None:
-        self.ui.fieldNameEdit.setText(value)
+        self.ui.name_edit.setText(value)
 
     @property
     def type(self) -> str:
-        return self.ui.typeBox.currentText()
+        return self.ui.type.currentText()
 
     @type.setter
     def type(self, value: str) -> None:
-        self.ui.typeBox.setCurrentText(value)
+        self.ui.type.setCurrentText(value)
 
     @property
     def is_checked(self) -> bool:
-        return self.ui.primaryKeyBox.isChecked()
+        return self.ui.primary_key.isChecked()
 
     @is_checked.setter
     def is_checked(self, value: bool) -> None:
-        self.ui.primaryKeyBox.setChecked(value)
+        self.ui.primary_key.setChecked(value)
 
     @property
     def widget(self) -> QWidget:

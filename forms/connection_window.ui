@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CreateConn</class>
- <widget class="QDialog" name="CreateConn">
+ <class>ConnectionWindow</class>
+ <widget class="QDialog" name="ConnectionWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -56,7 +56,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLineEdit" name="userEdit">
+       <widget class="QLineEdit" name="user_edit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -92,7 +92,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="passEdit">
+       <widget class="QLineEdit" name="password_edit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -128,7 +128,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="hostEdit">
+       <widget class="QLineEdit" name="host_edit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -167,7 +167,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="portEdit">
+       <widget class="QLineEdit" name="port_edit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -204,7 +204,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="dbNameEdit">
+       <widget class="QLineEdit" name="db_name_edit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -240,7 +240,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="createConnButton">
+       <widget class="QPushButton" name="connection_button">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
           <horstretch>0</horstretch>

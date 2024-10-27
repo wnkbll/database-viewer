@@ -29,22 +29,22 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string notr="true">DatabaseViewer</string>
+   <string notr="true">DBViewer</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="main_widget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_4">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="main_layout">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
+       <layout class="QVBoxLayout" name="left_layout">
         <item>
-         <widget class="QListWidget" name="tablesList">
+         <widget class="QListWidget" name="tables_list">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -77,9 +77,9 @@
          </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QVBoxLayout" name="buttons_layout">
           <item>
-           <widget class="QPushButton" name="addButton">
+           <widget class="QPushButton" name="add_button">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -98,7 +98,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="editButton">
+           <widget class="QPushButton" name="edit_button">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -117,7 +117,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="deleteButton">
+           <widget class="QPushButton" name="delete_button">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -140,7 +140,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QStackedWidget" name="stackedWidget">
+       <widget class="QStackedWidget" name="pages">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -150,7 +150,7 @@
         <property name="currentIndex">
          <number>0</number>
         </property>
-        <widget class="QWidget" name="page1">
+        <widget class="QWidget" name="add_page">
          <widget class="QWidget" name="layoutWidget_4">
           <property name="geometry">
            <rect>
@@ -160,9 +160,9 @@
             <height>578</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayoutPage1">
+          <layout class="QVBoxLayout" name="add_page_layout">
            <item>
-            <widget class="QLabel" name="labelPage1">
+            <widget class="QLabel" name="add_page_label">
              <property name="enabled">
               <bool>true</bool>
              </property>
@@ -195,7 +195,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QFrame" name="framePage1">
+            <widget class="QFrame" name="add_page_frame">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -222,9 +222,9 @@
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
-               <layout class="QVBoxLayout" name="verticalLayoutFramePage1">
+               <layout class="QVBoxLayout" name="add_page_frame_layout">
                 <item>
-                 <widget class="QLineEdit" name="tableNameEditPage1">
+                 <widget class="QLineEdit" name="add_page_table_name_edit">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -260,7 +260,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QScrollArea" name="fieldsAreaPage1">
+                 <widget class="QScrollArea" name="add_page_scroll_area">
                   <property name="enabled">
                    <bool>true</bool>
                   </property>
@@ -291,7 +291,7 @@
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
                   </property>
-                  <widget class="QWidget" name="scrollAreaWidgetContentsPage1">
+                  <widget class="QWidget" name="add_page_scroll_area_widget">
                    <property name="geometry">
                     <rect>
                      <x>0</x>
@@ -309,9 +309,9 @@
                  </widget>
                 </item>
                 <item>
-                 <layout class="QHBoxLayout" name="fieldButtonsLayoutPage1">
+                 <layout class="QHBoxLayout" name="add_page_buttons_layout">
                   <item>
-                   <widget class="QPushButton" name="newFieldButtonPage1">
+                   <widget class="QPushButton" name="add_page_add_button">
                     <property name="minimumSize">
                      <size>
                       <width>100</width>
@@ -325,12 +325,12 @@
                      </size>
                     </property>
                     <property name="text">
-                     <string>Add field</string>
+                     <string>Add column</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="removeFieldButtonPage1">
+                   <widget class="QPushButton" name="add_page_remove_button">
                     <property name="minimumSize">
                      <size>
                       <width>100</width>
@@ -344,12 +344,12 @@
                      </size>
                     </property>
                     <property name="text">
-                     <string>Remove field</string>
+                     <string>Remove column</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="saveButtonPage1">
+                   <widget class="QPushButton" name="add_page_save_button">
                     <property name="minimumSize">
                      <size>
                       <width>100</width>
@@ -377,7 +377,7 @@
           </layout>
          </widget>
         </widget>
-        <widget class="QWidget" name="page2">
+        <widget class="QWidget" name="edit_page">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -389,13 +389,13 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>652</width>
+            <width>654</width>
             <height>578</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayoutPage2">
+          <layout class="QVBoxLayout" name="edit_page_layout">
            <item>
-            <widget class="QLabel" name="labelPage2">
+            <widget class="QLabel" name="edit_page_label">
              <property name="enabled">
               <bool>true</bool>
              </property>
@@ -428,7 +428,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QFrame" name="framePage2">
+            <widget class="QFrame" name="edit_page_frame">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -453,150 +453,154 @@
              <property name="frameShadow">
               <enum>QFrame::Shadow::Raised</enum>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_3">
+             <layout class="QVBoxLayout" name="verticalLayout_4">
               <item>
-               <widget class="QLineEdit" name="tableNameEditPage2">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>600</width>
-                  <height>50</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>50</height>
-                 </size>
-                </property>
-                <property name="baseSize">
-                 <size>
-                  <width>0</width>
-                  <height>50</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>12</pointsize>
-                 </font>
-                </property>
-                <property name="placeholderText">
-                 <string>Table Name</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QScrollArea" name="fieldsAreaPage2">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>630</width>
-                  <height>100</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="autoFillBackground">
-                 <bool>false</bool>
-                </property>
-                <property name="verticalScrollBarPolicy">
-                 <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
-                </property>
-                <property name="sizeAdjustPolicy">
-                 <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
-                </property>
-                <property name="widgetResizable">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-                </property>
-                <widget class="QWidget" name="scrollAreaWidgetContentsPage2">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>628</width>
-                   <height>98</height>
-                  </rect>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout2">
-                  <property name="sizeConstraint">
-                   <enum>QLayout::SizeConstraint::SetFixedSize</enum>
+               <layout class="QVBoxLayout" name="edit_page_frame_layout">
+                <item>
+                 <widget class="QLineEdit" name="edit_page_table_name_edit">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>600</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                  <property name="baseSize">
+                   <size>
+                    <width>0</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Table Name</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="edit_page_scroll_area">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>630</width>
+                    <height>100</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="autoFillBackground">
+                   <bool>false</bool>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
+                  </property>
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                  </property>
+                  <widget class="QWidget" name="edit_page_scroll_area_widget">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>628</width>
+                     <height>382</height>
+                    </rect>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout1_3">
+                    <property name="sizeConstraint">
+                     <enum>QLayout::SizeConstraint::SetFixedSize</enum>
+                    </property>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="edit_page_buttons_layout">
+                  <item>
+                   <widget class="QPushButton" name="edit_page_add_button">
+                    <property name="minimumSize">
+                     <size>
+                      <width>100</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Add column</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="edit_page_remove_button">
+                    <property name="minimumSize">
+                     <size>
+                      <width>100</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Remove column</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="edit_page_save_button">
+                    <property name="minimumSize">
+                     <size>
+                      <width>100</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Save</string>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
-                </widget>
-               </widget>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="fieldButtonsLayoutPage2">
-                <item>
-                 <widget class="QPushButton" name="newFieldButtonPage2">
-                  <property name="minimumSize">
-                   <size>
-                    <width>100</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Add field</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="removeFieldButtonPage2">
-                  <property name="minimumSize">
-                   <size>
-                    <width>100</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Remove field</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="saveButtonPage2">
-                  <property name="minimumSize">
-                   <size>
-                    <width>100</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Save</string>
-                  </property>
-                 </widget>
                 </item>
                </layout>
               </item>

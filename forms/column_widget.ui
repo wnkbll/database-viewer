@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>338</width>
-    <height>72</height>
+    <height>70</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,18 +16,18 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>10</y>
-     <width>326</width>
+     <x>9</x>
+     <y>9</y>
+     <width>320</width>
      <height>52</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="fieldLayout">
+   <layout class="QHBoxLayout" name="column_layout">
     <property name="sizeConstraint">
      <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
     </property>
     <item>
-     <widget class="QLineEdit" name="fieldNameEdit">
+     <widget class="QLineEdit" name="name_edit">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -66,7 +66,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="typeBox">
+     <widget class="QComboBox" name="type">
       <item>
        <property name="text">
         <string>Integer</string>
@@ -90,7 +90,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="primaryKeyBox">
+     <widget class="QCheckBox" name="primary_key">
       <property name="text">
        <string>Primary Key</string>
       </property>
