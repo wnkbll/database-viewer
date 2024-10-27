@@ -1,12 +1,11 @@
 from typing import Callable
 
-from PySide6.QtWidgets import QMainWindow, QGridLayout, QWidget
+from PySide6.QtWidgets import QMainWindow, QLayout
 
 from src.backend.connection import DatabaseConnection
 from src.backend.types import Column, Difference
+from src.frontend.column_widget import Widget, ColumnWidget
 from src.frontend.error_window import ErrorWindow
-from src.frontend.pyqt.ui_column_widget import Ui_ColumnWidget
-from src.frontend.column_widget import ColumnWidget
 from src.frontend.pyqt.ui_main import Ui_MainWindow
 
 
@@ -16,13 +15,13 @@ class MainWindow(QMainWindow):
 
         self.connection: DatabaseConnection = DatabaseConnection()
 
-        self.add_page_fields: list[Ui_ColumnWidget] = []
-        self.edit_page_fields: list[Ui_ColumnWidget] = []
+        self.add_page_fields: list[ColumnWidget] = []
+        self.edit_page_fields: list[ColumnWidget] = []
 
         self.tables: list[str] = []
 
         self.current_table: str = ""
-        self.current_fields: dict[Ui_ColumnWidget, Column] = {}
+        self.current_fields: dict[ColumnWidget, Column] = {}
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -49,15 +48,6 @@ class MainWindow(QMainWindow):
             self.remove_field_button_clicked(self.ui.gridLayout2, self.edit_page_fields)
         )
 
-        self.field_widget_id = Ui_ColumnWidget()
-        self.field_widget_id.setupUi(self)
-        self.field_widget_id.fieldNameEdit.setText("id")
-        self.field_widget_id.typeBox.setCurrentIndex(0)
-        self.field_widget_id.primaryKeyBox.setChecked(True)
-        self.add_page_fields.append(self.field_widget_id)
-
-        self.ui.gridLayout1.addWidget(self.field_widget_id.layoutWidget)
-
     def show(self) -> None:
         self.update_list_of_tables()
         super().show()
@@ -72,21 +62,15 @@ class MainWindow(QMainWindow):
 
     def add_button_clicked(self) -> None:
         if self.ui.gridLayout1.itemAt(0) is None:
-            self.field_widget_id.setupUi(self)
-            self.field_widget_id.fieldNameEdit.setText("id")
-            self.field_widget_id.typeBox.setCurrentIndex(0)
-            self.field_widget_id.primaryKeyBox.setChecked(True)
-            self.ui.gridLayout1.addWidget(self.field_widget_id.layoutWidget)
-            self.add_page_fields.append(self.field_widget_id)
+            column_widget = self.create_column_widget("id", "Integer", True)
+            self.place_widget(column_widget, self.ui.gridLayout1, self.add_page_fields)
 
         self.ui.stackedWidget.setCurrentIndex(0)
 
     def edit_button_clicked(self) -> None:
         if len(self.ui.tablesList.selectedItems()) != 0:
             for i in range(len(self.edit_page_fields)):
-                widget_to_delete = self.edit_page_fields.pop()
-                self.ui.gridLayout2.removeWidget(widget_to_delete.layoutWidget)
-                widget_to_delete.layoutWidget.deleteLater()
+                self.delete_widget(self.edit_page_fields[i], self.ui.gridLayout2, self.edit_page_fields)
 
             self.current_fields = {}
 
@@ -96,14 +80,9 @@ class MainWindow(QMainWindow):
             fields = self.connection.get_fields(self.current_table)
 
             for field in fields:
-                field_widget = Ui_ColumnWidget()
-                field_widget.setupUi(self)
-                field_widget.fieldNameEdit.setText(field.name)
-                field_widget.typeBox.setCurrentText(field.type_)
-                field_widget.primaryKeyBox.setChecked(field.is_primary_key)
-                self.ui.gridLayout2.addWidget(field_widget.layoutWidget)
-                self.edit_page_fields.append(field_widget)
-                self.current_fields[field_widget] = field
+                column_widget = self.create_column_widget(field.name, field.type_, field.is_primary_key)
+                self.place_widget(column_widget, self.ui.gridLayout2, self.edit_page_fields)
+                self.current_fields[column_widget] = field
 
             self.ui.tableNameEditPage2.setText(table_name)
             self.ui.stackedWidget.setCurrentIndex(1)
@@ -114,15 +93,10 @@ class MainWindow(QMainWindow):
             self.connection.delete_table(table)
             self.update_list_of_tables()
 
-    def add_field_button_clicked(self, grid_layout: QGridLayout, widgets: list[Ui_ColumnWidget]) -> Callable:
+    def add_field_button_clicked(self, layout: QLayout, widgets: list[Widget]) -> Callable:
         def wrapper() -> None:
-            field_widget = Ui_ColumnWidget()
-            field_widget.setupUi(self)
-            field_widget.typeBox.setCurrentIndex(0)
-            field_widget.primaryKeyBox.setChecked(False)
-
-            widgets.append(field_widget)
-            grid_layout.addWidget(field_widget.layoutWidget)
+            column_widget = self.create_column_widget(None, "Integer", False)
+            self.place_widget(column_widget, layout, widgets)
 
         return wrapper
 
@@ -131,17 +105,14 @@ class MainWindow(QMainWindow):
             table_name = self.ui.tableNameEditPage1.text()
             if table_name not in self.tables:
                 fields = [
-                    Column(name=widget.fieldNameEdit.text(), type_=widget.typeBox.currentText(),
-                           is_primary_key=widget.primaryKeyBox.isChecked())
+                    Column(name=widget.name, type_=widget.type, is_primary_key=widget.is_checked)
                     for widget in self.add_page_fields
                 ]
                 self.connection.create_table(table_name, fields)
                 self.update_list_of_tables()
 
                 for i in range(len(self.add_page_fields)):
-                    widget_to_delete = self.add_page_fields.pop()
-                    self.ui.gridLayout1.removeWidget(widget_to_delete.layoutWidget)
-                    widget_to_delete.layoutWidget.deleteLater()
+                    self.delete_widget(self.add_page_fields[i], self.ui.gridLayout1, self.add_page_fields)
 
                 self.ui.tableNameEditPage1.setText("")
                 self.add_button_clicked()
@@ -155,14 +126,12 @@ class MainWindow(QMainWindow):
                 if widget in self.current_fields.keys():
                     difference = Difference(
                         self.current_fields[widget],
-                        Column(name=widget.fieldNameEdit.text(), type_=widget.typeBox.currentText(),
-                               is_primary_key=widget.primaryKeyBox.isChecked())
+                        Column(name=widget.name, type_=widget.type, is_primary_key=widget.is_checked)
                     )
                 else:
                     difference = Difference(
                         None,
-                        Column(name=widget.fieldNameEdit.text(), type_=widget.typeBox.currentText(),
-                               is_primary_key=widget.primaryKeyBox.isChecked())
+                        Column(name=widget.name, type_=widget.type, is_primary_key=widget.is_checked)
                     )
                 differences.append(difference)
 
@@ -176,9 +145,7 @@ class MainWindow(QMainWindow):
                 self.update_list_of_tables()
 
                 for i in range(len(self.edit_page_fields)):
-                    widget_to_delete = self.edit_page_fields.pop()
-                    self.ui.gridLayout2.removeWidget(widget_to_delete.layoutWidget)
-                    widget_to_delete.layoutWidget.deleteLater()
+                    self.delete_widget(self.edit_page_fields[i], self.ui.gridLayout2, self.edit_page_fields)
 
                 self.ui.tableNameEditPage2.setText("")
                 self.add_button_clicked()
@@ -196,12 +163,32 @@ class MainWindow(QMainWindow):
 
         return wrapper
 
-    @staticmethod
-    def remove_field_button_clicked(grid_layout: QGridLayout, widgets: list[Ui_ColumnWidget]) -> Callable:
+    def remove_field_button_clicked(self, layout: QLayout, widgets: list[Widget]) -> Callable:
         def wrapper() -> None:
             if len(widgets) > 0:
-                widget_to_delete = widgets.pop()
-                grid_layout.removeWidget(widget_to_delete.layoutWidget)
-                widget_to_delete.layoutWidget.deleteLater()
+                self.delete_widget(widgets[len(widgets) - 1], layout, widgets)
 
         return wrapper
+
+    @staticmethod
+    def create_column_widget(name: str | None, type_: str, is_checked: bool) -> ColumnWidget:
+        column_widget = ColumnWidget()
+
+        if name is not None:
+            column_widget.name = name
+
+        column_widget.type = type_
+        column_widget.is_checked = is_checked
+
+        return column_widget
+
+    @staticmethod
+    def place_widget(widget: Widget, layout: QLayout, widgets: list[Widget]) -> None:
+        layout.addWidget(widget.widget)
+        widgets.append(widget)
+
+    @staticmethod
+    def delete_widget(widget: Widget, layout: QLayout, widgets: list[Widget]) -> None:
+        widgets.remove(widget)
+        layout.removeWidget(widget.widget)
+        widget.widget.deleteLater()
