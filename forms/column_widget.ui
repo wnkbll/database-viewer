@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FieldWidget</class>
- <widget class="QWidget" name="FieldWidget">
+ <class>ColumnWidget</class>
+ <widget class="QWidget" name="ColumnWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -61,7 +61,7 @@
        <string/>
       </property>
       <property name="placeholderText">
-       <string>Field Name</string>
+       <string>Column Name</string>
       </property>
      </widget>
     </item>

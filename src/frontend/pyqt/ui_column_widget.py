@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'field_widget.ui'
+## Form generated from reading UI file 'column_widget.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.8.0
 ##
@@ -18,12 +18,12 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
     QLayout, QLineEdit, QSizePolicy, QWidget)
 
-class Ui_FieldWidget(object):
-    def setupUi(self, FieldWidget):
-        if not FieldWidget.objectName():
-            FieldWidget.setObjectName(u"FieldWidget")
-        FieldWidget.resize(338, 72)
-        self.layoutWidget = QWidget(FieldWidget)
+class Ui_ColumnWidget(object):
+    def setupUi(self, ColumnWidget):
+        if not ColumnWidget.objectName():
+            ColumnWidget.setObjectName(u"ColumnWidget")
+        ColumnWidget.resize(338, 72)
+        self.layoutWidget = QWidget(ColumnWidget)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(0, 10, 326, 52))
         self.fieldLayout = QHBoxLayout(self.layoutWidget)
@@ -61,20 +61,21 @@ class Ui_FieldWidget(object):
 
         self.fieldLayout.addWidget(self.primaryKeyBox)
 
-        self.retranslateUi(FieldWidget)
 
-        QMetaObject.connectSlotsByName(FieldWidget)
+        self.retranslateUi(ColumnWidget)
 
+        QMetaObject.connectSlotsByName(ColumnWidget)
     # setupUi
 
-    def retranslateUi(self, FieldWidget):
-        FieldWidget.setWindowTitle(QCoreApplication.translate("FieldWidget", u"Form", None))
+    def retranslateUi(self, ColumnWidget):
+        ColumnWidget.setWindowTitle(QCoreApplication.translate("ColumnWidget", u"Form", None))
         self.fieldNameEdit.setText("")
-        self.fieldNameEdit.setPlaceholderText(QCoreApplication.translate("FieldWidget", u"Field Name", None))
-        self.typeBox.setItemText(0, QCoreApplication.translate("FieldWidget", u"Integer", None))
-        self.typeBox.setItemText(1, QCoreApplication.translate("FieldWidget", u"Float", None))
-        self.typeBox.setItemText(2, QCoreApplication.translate("FieldWidget", u"Text", None))
-        self.typeBox.setItemText(3, QCoreApplication.translate("FieldWidget", u"Datetime", None))
+        self.fieldNameEdit.setPlaceholderText(QCoreApplication.translate("ColumnWidget", u"Column Name", None))
+        self.typeBox.setItemText(0, QCoreApplication.translate("ColumnWidget", u"Integer", None))
+        self.typeBox.setItemText(1, QCoreApplication.translate("ColumnWidget", u"Float", None))
+        self.typeBox.setItemText(2, QCoreApplication.translate("ColumnWidget", u"Text", None))
+        self.typeBox.setItemText(3, QCoreApplication.translate("ColumnWidget", u"Datetime", None))
 
-        self.primaryKeyBox.setText(QCoreApplication.translate("FieldWidget", u"Primary Key", None))
+        self.primaryKeyBox.setText(QCoreApplication.translate("ColumnWidget", u"Primary Key", None))
     # retranslateUi
+

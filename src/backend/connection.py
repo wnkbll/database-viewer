@@ -1,7 +1,7 @@
 import psycopg.errors
 from psycopg import Connection
 
-from src.backend.types import Field, Difference
+from src.backend.types import Column, Difference
 
 
 class DatabaseConnection:
@@ -37,7 +37,7 @@ class DatabaseConnection:
 
                 return [table[0] for table in cursor.fetchall()]
 
-    def get_fields(self, table_name: str) -> list[Field]:
+    def get_fields(self, table_name: str) -> list[Column]:
         schema = "public"
 
         primary_key_query = (
@@ -62,10 +62,10 @@ class DatabaseConnection:
                 cursor.execute(fields_query)
                 fields_raw = cursor.fetchall()
 
-                fields: list[Field] = []
+                fields: list[Column] = []
                 for field_raw in fields_raw:
                     fields.append(
-                        Field(
+                        Column(
                             name=field_raw[0],
                             type_=self.types_from_db[field_raw[1]],
                             is_primary_key=True if field_raw[0] in primary_keys else False
@@ -74,7 +74,7 @@ class DatabaseConnection:
 
             return fields
 
-    def create_table(self, table_name: str, fields: list[Field]) -> None:
+    def create_table(self, table_name: str, fields: list[Column]) -> None:
         if table_name in self.get_tables():
             return None
 

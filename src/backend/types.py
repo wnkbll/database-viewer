@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Field:
+class Column:
     name: str
     type_: str
     is_primary_key: bool
@@ -10,5 +10,5 @@ class Field:
 
 @dataclass
 class Difference:
-    current: Field | None
-    updated: Field | None
+    current: Column | None
+    updated: Column | None
