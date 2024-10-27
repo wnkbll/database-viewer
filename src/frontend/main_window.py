@@ -48,6 +48,33 @@ class MainWindow(QMainWindow):
             self.remove_column_button_clicked(self.ui.gridLayout2, self.edit_page_columns)
         )
 
+    @staticmethod
+    def create_column_widget(name: str | None, type_: str, is_checked: bool) -> ColumnWidget:
+        column_widget = ColumnWidget()
+
+        if name is not None:
+            column_widget.name = name
+
+        column_widget.type = type_
+        column_widget.is_checked = is_checked
+
+        return column_widget
+
+    @staticmethod
+    def place_widget(widget: Widget, layout: QLayout, widgets: list[Widget]) -> None:
+        layout.addWidget(widget.widget)
+        widgets.append(widget)
+
+    @staticmethod
+    def delete_widget(widget: Widget, layout: QLayout, widgets: list[Widget]) -> None:
+        widgets.remove(widget)
+        layout.removeWidget(widget.widget)
+        widget.widget.deleteLater()
+
+    def clear_layout(self, layout: QLayout, widgets: list[Widget]) -> None:
+        for i in range(len(widgets) - 1, -1, -1):
+            self.delete_widget(widgets[i], layout, widgets)
+
     def show(self) -> None:
         self.update_list_of_tables()
         super().show()
@@ -70,8 +97,7 @@ class MainWindow(QMainWindow):
 
     def edit_button_clicked(self) -> None:
         if len(self.ui.tablesList.selectedItems()) != 0:
-            for i in range(len(self.edit_page_columns)):
-                self.delete_widget(self.edit_page_columns[i], self.ui.gridLayout2, self.edit_page_columns)
+            self.clear_layout(self.ui.gridLayout2, self.edit_page_columns)
 
             self.current_fields = {}
 
@@ -119,8 +145,7 @@ class MainWindow(QMainWindow):
                 self.connection.create_table(table_name, fields)
                 self.update_list_of_tables()
 
-                for i in range(len(self.add_page_columns)):
-                    self.delete_widget(self.add_page_columns[i], self.ui.gridLayout1, self.add_page_columns)
+                self.clear_layout(self.ui.gridLayout1, self.add_page_columns)
 
                 self.ui.tableNameEditPage1.setText("")
                 self.add_button_clicked()
@@ -152,8 +177,7 @@ class MainWindow(QMainWindow):
                 self.connection.update_table(self.current_table, table_name, differences)
                 self.update_list_of_tables()
 
-                for i in range(len(self.edit_page_columns)):
-                    self.delete_widget(self.edit_page_columns[i], self.ui.gridLayout2, self.edit_page_columns)
+                self.clear_layout(self.ui.gridLayout2, self.edit_page_columns)
 
                 self.ui.tableNameEditPage2.setText("")
                 self.add_button_clicked()
@@ -170,26 +194,3 @@ class MainWindow(QMainWindow):
                 self.update_table()
 
         return wrapper
-
-    @staticmethod
-    def create_column_widget(name: str | None, type_: str, is_checked: bool) -> ColumnWidget:
-        column_widget = ColumnWidget()
-
-        if name is not None:
-            column_widget.name = name
-
-        column_widget.type = type_
-        column_widget.is_checked = is_checked
-
-        return column_widget
-
-    @staticmethod
-    def place_widget(widget: Widget, layout: QLayout, widgets: list[Widget]) -> None:
-        layout.addWidget(widget.widget)
-        widgets.append(widget)
-
-    @staticmethod
-    def delete_widget(widget: Widget, layout: QLayout, widgets: list[Widget]) -> None:
-        widgets.remove(widget)
-        layout.removeWidget(widget.widget)
-        widget.widget.deleteLater()
