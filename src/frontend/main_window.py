@@ -51,6 +51,7 @@ class MainWindow(QMainWindow):
     def show(self) -> None:
         self.update_list_of_tables()
         super().show()
+        self.add_button_clicked()
 
     def update_list_of_tables(self) -> None:
         self.ui.tablesList.clear()
