@@ -1,22 +1,19 @@
 from typing import Callable
 
-import psycopg
-from PySide6.QtWidgets import QMainWindow, QDialog, QGridLayout
+from PySide6.QtWidgets import QMainWindow, QGridLayout
 
 from src.backend.connection import DatabaseConnection
 from src.backend.types import Field, Difference
 from src.frontend.error_window import ErrorWindow
-from src.frontend.pyqt.ui_create_conn import Ui_CreateConn
 from src.frontend.pyqt.ui_field_widget import Ui_FieldWidget
 from src.frontend.pyqt.ui_main import Ui_MainWindow
 
 
-class DatabaseViewer(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
-        super(DatabaseViewer, self).__init__()
+        super(MainWindow, self).__init__()
 
         self.connection: DatabaseConnection = DatabaseConnection()
-        self.is_connected: bool = False
 
         self.add_page_fields: list[Ui_FieldWidget] = []
         self.edit_page_fields: list[Ui_FieldWidget] = []
@@ -28,12 +25,6 @@ class DatabaseViewer(QMainWindow):
 
         self.ui_main = Ui_MainWindow()
         self.ui_main.setupUi(self)
-
-        self.create_conn_window = QDialog()
-        self.create_conn_window.window().setWindowTitle("Create Connection")
-        self.ui_create_conn = Ui_CreateConn()
-        self.ui_create_conn.setupUi(self.create_conn_window)
-        self.ui_create_conn.createConnButton.clicked.connect(self.create_connection)
 
         self.ui_main.addButton.clicked.connect(self.add_button_clicked)
         self.ui_main.editButton.clicked.connect(self.edit_button_clicked)
@@ -66,35 +57,8 @@ class DatabaseViewer(QMainWindow):
         self.ui_main.gridLayout1.addWidget(self.field_widget_id.layoutWidget)
 
     def show(self) -> None:
-        if not self.is_connected:
-            self.create_conn_window.show()
-            return
-
-        self.create_conn_window.close()
+        self.update_list_of_tables()
         super().show()
-
-    def create_connection(self) -> None:
-        # user = self.ui_create_conn.userEdit.text().strip()
-        # password = self.ui_create_conn.passEdit.text().strip()
-        # host = self.ui_create_conn.hostEdit.text().strip()
-        # port = self.ui_create_conn.portEdit.text().strip()
-        # name = self.ui_create_conn.dbNameEdit.text().strip()
-
-        user = "postgres"
-        password = "admin"
-        host = "localhost"
-        port = "5432"
-        name = "test_db"
-
-        if any((user == "", password == "", host == "", port == "", name == "")): return None
-
-        try:
-            self.connection.set_connection(user, password, host, port, name)
-            self.is_connected = True
-            self.show()
-            self.update_list_of_tables()
-        except psycopg.OperationalError as e:
-            ErrorWindow().show_error(e)
 
     def update_list_of_tables(self) -> None:
         self.ui_main.tablesList.clear()
@@ -217,7 +181,7 @@ class DatabaseViewer(QMainWindow):
                 self.ui_main.tableNameEditPage2.setText("")
                 self.add_button_clicked()
             except ValueError as e:
-                ErrorWindow().show_error(e)
+                ErrorWindow().show_window(e.__repr__())
 
     def save_button_clicked(self, action: str) -> Callable:
         def wrapper() -> None:

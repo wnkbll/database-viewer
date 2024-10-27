@@ -9,15 +9,15 @@ class ErrorWindow(QDialog):
 
         self.ui_error = Ui_Error()
         self.ui_error.setupUi(self)
-        self.ui_error.buttonBox.buttons()[0].clicked.connect(lambda _: self.close_error())
+        self.ui_error.buttonBox.buttons()[0].clicked.connect(lambda _: self.close_window())
 
         self.window().setWindowTitle("Error")
 
-    def show_error(self, error: Exception) -> None:
-        self.ui_error.textBrowser.setText(error.__repr__())
+    def show_window(self, error: str) -> None:
+        self.ui_error.textBrowser.setText(error)
         self.show()
 
-    def close_error(self) -> bool:
+    def close_window(self) -> bool:
         close_status = self.close()
         self.deleteLater()
         return close_status
