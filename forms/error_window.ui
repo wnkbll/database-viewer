@@ -28,6 +28,9 @@
     <height>200</height>
    </size>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::FocusPolicy::ClickFocus</enum>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>

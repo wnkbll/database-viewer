@@ -25,7 +25,7 @@ class Ui_ConnectionWindow(object):
         ConnectionWindow.resize(600, 400)
         ConnectionWindow.setMinimumSize(QSize(600, 400))
         ConnectionWindow.setMaximumSize(QSize(800, 400))
-        ConnectionWindow.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        ConnectionWindow.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.verticalLayout_2 = QVBoxLayout(ConnectionWindow)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.frame = QFrame(ConnectionWindow)

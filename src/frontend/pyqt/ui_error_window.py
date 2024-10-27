@@ -30,6 +30,7 @@ class Ui_ErrorWindow(object):
         ErrorWindow.setSizePolicy(sizePolicy)
         ErrorWindow.setMinimumSize(QSize(400, 200))
         ErrorWindow.setMaximumSize(QSize(400, 200))
+        ErrorWindow.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
         self.verticalLayout_2 = QVBoxLayout(ErrorWindow)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.layout = QVBoxLayout()
