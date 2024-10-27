@@ -11,24 +11,24 @@ class ConnectionWindow(QDialog):
     def __init__(self):
         super(ConnectionWindow, self).__init__()
 
-        self.ui_create_conn = Ui_CreateConn()
-        self.ui_create_conn.setupUi(self)
-        self.ui_create_conn.createConnButton.clicked.connect(self.create_connection)
+        self.ui = Ui_CreateConn()
+        self.ui.setupUi(self)
+        self.ui.createConnButton.clicked.connect(self.create_connection)
 
         self.window().setWindowTitle("Create Connection")
 
     def create_connection(self) -> None:
-        self.ui_create_conn.userEdit.setText("postgres")
-        self.ui_create_conn.passEdit.setText("admin")
-        self.ui_create_conn.hostEdit.setText("localhost")
-        self.ui_create_conn.portEdit.setText("5432")
-        self.ui_create_conn.dbNameEdit.setText("test_db")
+        self.ui.userEdit.setText("postgres")
+        self.ui.passEdit.setText("admin")
+        self.ui.hostEdit.setText("localhost")
+        self.ui.portEdit.setText("5432")
+        self.ui.dbNameEdit.setText("test_db")
 
-        user = self.ui_create_conn.userEdit.text().strip()
-        password = self.ui_create_conn.passEdit.text().strip()
-        host = self.ui_create_conn.hostEdit.text().strip()
-        port = self.ui_create_conn.portEdit.text().strip()
-        name = self.ui_create_conn.dbNameEdit.text().strip()
+        user = self.ui.userEdit.text().strip()
+        password = self.ui.passEdit.text().strip()
+        host = self.ui.hostEdit.text().strip()
+        port = self.ui.portEdit.text().strip()
+        name = self.ui.dbNameEdit.text().strip()
 
         if any((user == "", password == "", host == "", port == "", name == "")):
             ErrorWindow().show_window("Fields must be filled")
