@@ -4,11 +4,11 @@ import psycopg
 from PySide6.QtWidgets import QMainWindow, QDialog, QGridLayout
 
 from src.connection import DatabaseConnection
+from src.error_window import ErrorWindow
 from src.field import Field, Difference
 from src.pyqt.ui_create_conn import Ui_CreateConn
 from src.pyqt.ui_field_widget import Ui_FieldWidget
 from src.pyqt.ui_main import Ui_MainWindow
-from src.pyqt.ui_error import Ui_Error
 
 
 class DatabaseViewer(QMainWindow):
@@ -30,16 +30,10 @@ class DatabaseViewer(QMainWindow):
         self.ui_main.setupUi(self)
 
         self.create_conn_window = QDialog()
-        self.create_conn_window.setWindowTitle("Create Connection")
+        self.create_conn_window.window().setWindowTitle("Create Connection")
         self.ui_create_conn = Ui_CreateConn()
         self.ui_create_conn.setupUi(self.create_conn_window)
         self.ui_create_conn.createConnButton.clicked.connect(self.create_connection)
-
-        self.error_window = QDialog()
-        self.error_window.setWindowTitle("Error")
-        self.ui_error = Ui_Error()
-        self.ui_error.setupUi(self.error_window)
-        self.ui_error.buttonBox.buttons()[0].clicked.connect(lambda _: self.error_window.close())
 
         self.ui_main.addButton.clicked.connect(self.add_button_clicked)
         self.ui_main.editButton.clicked.connect(self.edit_button_clicked)
@@ -80,11 +74,17 @@ class DatabaseViewer(QMainWindow):
         super().show()
 
     def create_connection(self) -> None:
-        user = self.ui_create_conn.userEdit.text().strip()
-        password = self.ui_create_conn.passEdit.text().strip()
-        host = self.ui_create_conn.hostEdit.text().strip()
-        port = self.ui_create_conn.portEdit.text().strip()
-        name = self.ui_create_conn.dbNameEdit.text().strip()
+        # user = self.ui_create_conn.userEdit.text().strip()
+        # password = self.ui_create_conn.passEdit.text().strip()
+        # host = self.ui_create_conn.hostEdit.text().strip()
+        # port = self.ui_create_conn.portEdit.text().strip()
+        # name = self.ui_create_conn.dbNameEdit.text().strip()
+
+        user = "postgres"
+        password = "admin"
+        host = "localhost"
+        port = "5432"
+        name = "test_db"
 
         if any((user == "", password == "", host == "", port == "", name == "")): return None
 
@@ -94,8 +94,7 @@ class DatabaseViewer(QMainWindow):
             self.show()
             self.update_list_of_tables()
         except psycopg.OperationalError as e:
-            self.ui_error.textBrowser.setText(e.__repr__())
-            self.error_window.show()
+            ErrorWindow().show_error(e)
 
     def update_list_of_tables(self) -> None:
         self.ui_main.tablesList.clear()
@@ -190,12 +189,14 @@ class DatabaseViewer(QMainWindow):
                 if widget in self.current_fields.keys():
                     difference = Difference(
                         self.current_fields[widget],
-                        Field(name=widget.fieldNameEdit.text(), type_=widget.typeBox.currentText(), is_primary_key=widget.primaryKeyBox.isChecked())
+                        Field(name=widget.fieldNameEdit.text(), type_=widget.typeBox.currentText(),
+                              is_primary_key=widget.primaryKeyBox.isChecked())
                     )
                 else:
                     difference = Difference(
                         None,
-                        Field(name=widget.fieldNameEdit.text(), type_=widget.typeBox.currentText(), is_primary_key=widget.primaryKeyBox.isChecked())
+                        Field(name=widget.fieldNameEdit.text(), type_=widget.typeBox.currentText(),
+                              is_primary_key=widget.primaryKeyBox.isChecked())
                     )
                 differences.append(difference)
 
@@ -216,8 +217,7 @@ class DatabaseViewer(QMainWindow):
                 self.ui_main.tableNameEditPage2.setText("")
                 self.add_button_clicked()
             except ValueError as e:
-                self.ui_error.textBrowser.setText(e.__repr__())
-                self.error_window.show()
+                ErrorWindow().show_error(e)
 
     def save_button_clicked(self, action: str) -> Callable:
         def wrapper() -> None:
