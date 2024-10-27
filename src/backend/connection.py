@@ -1,7 +1,7 @@
 import psycopg.errors
 from psycopg import Connection
 
-from src.field import Field, Difference
+from src.backend.types import Field, Difference
 
 
 class DatabaseConnection:

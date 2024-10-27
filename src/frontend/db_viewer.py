@@ -3,8 +3,8 @@ from typing import Callable
 import psycopg
 from PySide6.QtWidgets import QMainWindow, QDialog, QGridLayout
 
-from src.connection import DatabaseConnection
-from src.field import Field, Difference
+from src.backend.connection import DatabaseConnection
+from src.backend.types import Field, Difference
 from src.frontend.error_window import ErrorWindow
 from src.frontend.pyqt.ui_create_conn import Ui_CreateConn
 from src.frontend.pyqt.ui_field_widget import Ui_FieldWidget
