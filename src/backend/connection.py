@@ -95,13 +95,13 @@ class DatabaseConnection:
 
         with Connection.connect(self.postgres_dsn) as conn:
             with conn.cursor() as cursor:
+                cursor.execute(query)
+
                 if len(primary_keys) > 0:
                     add_primary_keys_query = (
                         f"ALTER TABLE {table_name} ADD PRIMARY KEY ({", ".join(primary_keys)});"
                     )
                     cursor.execute(add_primary_keys_query)
-
-                cursor.execute(query)
 
                 conn.commit()
 
