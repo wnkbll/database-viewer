@@ -2,7 +2,7 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
-from src.db_viewer import DatabaseViewer
+from src.frontend.db_viewer import DatabaseViewer
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

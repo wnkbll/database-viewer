@@ -89,9 +89,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.deleteButton)
 
-
         self.verticalLayout_5.addLayout(self.verticalLayout)
-
 
         self.horizontalLayout.addLayout(self.verticalLayout_5)
 
@@ -152,7 +150,8 @@ class Ui_MainWindow(object):
         self.fieldsAreaPage1.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.fieldsAreaPage1.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustIgnored)
         self.fieldsAreaPage1.setWidgetResizable(True)
-        self.fieldsAreaPage1.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+        self.fieldsAreaPage1.setAlignment(
+            Qt.AlignmentFlag.AlignLeading | Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         self.scrollAreaWidgetContentsPage1 = QWidget()
         self.scrollAreaWidgetContentsPage1.setObjectName(u"scrollAreaWidgetContentsPage1")
         self.scrollAreaWidgetContentsPage1.setGeometry(QRect(0, 0, 628, 382))
@@ -186,12 +185,9 @@ class Ui_MainWindow(object):
 
         self.fieldButtonsLayoutPage1.addWidget(self.saveButtonPage1)
 
-
         self.verticalLayoutFramePage1.addLayout(self.fieldButtonsLayoutPage1)
 
-
         self.verticalLayout_2.addLayout(self.verticalLayoutFramePage1)
-
 
         self.verticalLayoutPage1.addWidget(self.framePage1)
 
@@ -247,7 +243,8 @@ class Ui_MainWindow(object):
         self.fieldsAreaPage2.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.fieldsAreaPage2.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustIgnored)
         self.fieldsAreaPage2.setWidgetResizable(True)
-        self.fieldsAreaPage2.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+        self.fieldsAreaPage2.setAlignment(
+            Qt.AlignmentFlag.AlignLeading | Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         self.scrollAreaWidgetContentsPage2 = QWidget()
         self.scrollAreaWidgetContentsPage2.setObjectName(u"scrollAreaWidgetContentsPage2")
         self.scrollAreaWidgetContentsPage2.setGeometry(QRect(0, 0, 628, 98))
@@ -281,16 +278,13 @@ class Ui_MainWindow(object):
 
         self.fieldButtonsLayoutPage2.addWidget(self.saveButtonPage2)
 
-
         self.verticalLayout_3.addLayout(self.fieldButtonsLayoutPage2)
-
 
         self.verticalLayoutPage2.addWidget(self.framePage2)
 
         self.stackedWidget.addWidget(self.page2)
 
         self.horizontalLayout.addWidget(self.stackedWidget)
-
 
         self.verticalLayout_4.addLayout(self.horizontalLayout)
 
@@ -300,8 +294,8 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.setCurrentIndex(0)
 
-
         QMetaObject.connectSlotsByName(MainWindow)
+
     # setupUi
 
     def retranslateUi(self, MainWindow):
@@ -320,4 +314,3 @@ class Ui_MainWindow(object):
         self.saveButtonPage2.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         pass
     # retranslateUi
-

@@ -46,18 +46,16 @@ class Ui_Error(object):
 
         self.verticalLayout.addWidget(self.buttonBox)
 
-
         self.verticalLayout_2.addLayout(self.verticalLayout)
-
 
         self.retranslateUi(Error)
         self.buttonBox.rejected.connect(Error.reject)
         self.buttonBox.accepted.connect(Error.accept)
 
         QMetaObject.connectSlotsByName(Error)
+
     # setupUi
 
     def retranslateUi(self, Error):
         Error.setWindowTitle(QCoreApplication.translate("Error", u"Dialog", None))
     # retranslateUi
-

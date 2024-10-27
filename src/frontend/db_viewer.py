@@ -4,11 +4,11 @@ import psycopg
 from PySide6.QtWidgets import QMainWindow, QDialog, QGridLayout
 
 from src.connection import DatabaseConnection
-from src.error_window import ErrorWindow
 from src.field import Field, Difference
-from src.pyqt.ui_create_conn import Ui_CreateConn
-from src.pyqt.ui_field_widget import Ui_FieldWidget
-from src.pyqt.ui_main import Ui_MainWindow
+from src.frontend.error_window import ErrorWindow
+from src.frontend.pyqt.ui_create_conn import Ui_CreateConn
+from src.frontend.pyqt.ui_field_widget import Ui_FieldWidget
+from src.frontend.pyqt.ui_main import Ui_MainWindow
 
 
 class DatabaseViewer(QMainWindow):

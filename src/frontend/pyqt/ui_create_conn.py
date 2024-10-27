@@ -114,13 +114,12 @@ class Ui_CreateConn(object):
 
         self.verticalLayout.addWidget(self.createConnButton)
 
-
         self.verticalLayout_2.addWidget(self.frame)
-
 
         self.retranslateUi(CreateConn)
 
         QMetaObject.connectSlotsByName(CreateConn)
+
     # setupUi
 
     def retranslateUi(self, CreateConn):
@@ -132,4 +131,3 @@ class Ui_CreateConn(object):
         self.dbNameEdit.setPlaceholderText(QCoreApplication.translate("CreateConn", u"Database Name", None))
         self.createConnButton.setText(QCoreApplication.translate("CreateConn", u"Create Connection", None))
     # retranslateUi
-

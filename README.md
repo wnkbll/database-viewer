@@ -9,7 +9,7 @@
 2) Запустить DBViewer.exe
 
 ### Как собрать приложение самостоятельно
-1) Клонировать репизиторий и настроить окружение
+1) Клонировать репозиторий и настроить окружение
 ```
 git clone https://github.com/wnkbll/fastapi-backend.git
 cd fastapi-backend

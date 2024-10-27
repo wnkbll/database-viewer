@@ -61,10 +61,10 @@ class Ui_FieldWidget(object):
 
         self.fieldLayout.addWidget(self.primaryKeyBox)
 
-
         self.retranslateUi(FieldWidget)
 
         QMetaObject.connectSlotsByName(FieldWidget)
+
     # setupUi
 
     def retranslateUi(self, FieldWidget):
@@ -78,4 +78,3 @@ class Ui_FieldWidget(object):
 
         self.primaryKeyBox.setText(QCoreApplication.translate("FieldWidget", u"Primary Key", None))
     # retranslateUi
-
